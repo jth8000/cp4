@@ -32,6 +32,9 @@ const itemSchema = new mongoose.Schema({
   phone: String,
   price: String,
   path: String,
+  donateAmount: Number,
+  donateName: String,
+  progress: Number,
 });
 
 // Create a model for items in the museum.
@@ -57,6 +60,9 @@ app.post('/api/items', async (req, res) => {
     owner: req.body.owner,
     price: req.body.price,
     phone: req.body.phone,
+    donateName: req.body.donateName,
+    donateAmount: req.body.donateAmount,
+    progress: req.body.progress,
   });
   try {
     await item.save();

@@ -1,15 +1,11 @@
 let app = new Vue({
-  el: '#app',
+  el: '#donate',
   data: {
-    listings: [{
-      addedName: '',
-      addedPrice: '',
-      addedListing: '',
-      addedAnimal: '',
-      addedNumber: '',
-      addedGender: '',
-      addedNewsletter: '',
-    }],
+    donateName: '',
+    donateAmount: '',
+    donated: false,
+    items: [],
+    addItem: null,
 progress: 0,
 
 },
@@ -17,22 +13,33 @@ progress: 0,
   }, */
 
   methods: {
-    addListing() {
-       Vue.set(app.listings,new Array);
-      this.listings.push({
-      //  date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-        name: "Name: " + this.addedName,
-        phone: "Phone Number: " + this.addedNumber,
-
-      });
-      this.addedNumber = '';
-    },
-
-    makeProgress() {
-      if(this.progress < 100) {
-        this.progress += 5;
+    async upload() {
+      try {
+        let r2 = await axios.post('/api/items', {
+          donateName: this.donateName,
+          donateAmount: this.donateAmount,
+        });
+        //makeProgress();
+        this.progress = parseInt(this.donateAmount) + parseInt(this.progress);
+        this.donated = true;
+        this.addItem = r2.data;
+      } catch (error) {
+        console.log(error);
       }
     },
+    async getItems() {
+  try {
+    let response = await axios.get("/api/items");
+    this.items = response.data;
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+},
+
+  /*  makeProgress() {
+        this.progress += 5;
+    },*/
   }
 
 });
