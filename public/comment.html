@@ -51,7 +51,7 @@
       <label>Amount</label>
       <input v-model="donateAmount" class="form-control"  placeholder="Amount">
     </div>
-    <button @click="upload" width="200" height="200" class="btn btn-primary center" >  Donate! </button>
+    <button @click="donated" width="200" height="200" class="btn btn-primary center" >  Donate! </button>
 </div>
 </div>
 </div>
@@ -63,7 +63,7 @@
   </div>
 </div>
 
-<p v-show="donated" class = "center">Thanks, {{donateName}}, for donating ${{donateAmount}}</p>
+<p v-if="donated1" class = "center">Thanks, {{donateName}}, for donating ${{donateAmount}}</p>
 
 </div>
 

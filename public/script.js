@@ -3,9 +3,7 @@ let app = new Vue({
   data: {
     donateName: '',
     donateAmount: '',
-    donated: false,
-    items: [],
-    addItem: null,
+    donated1: false,
 progress: 0,
 
 },
@@ -13,29 +11,17 @@ progress: 0,
   }, */
 
   methods: {
-    async upload() {
+    async donated() {
       try {
-        let r2 = await axios.post('/api/items', {
-          donateName: this.donateName,
-          donateAmount: this.donateAmount,
-        });
+          this.donateName = this.donateName,
+          this.donateAmount = this.donateAmount,
         //makeProgress();
         this.progress = parseInt(this.donateAmount) + parseInt(this.progress);
-        this.donated = true;
-        this.addItem = r2.data;
+        this.donated1 = true;
       } catch (error) {
         console.log(error);
       }
     },
-    async getItems() {
-  try {
-    let response = await axios.get("/api/items");
-    this.items = response.data;
-    return true;
-  } catch (error) {
-    console.log(error);
-  }
-},
 
   /*  makeProgress() {
         this.progress += 5;
